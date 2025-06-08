@@ -1,0 +1,152 @@
+body {
+    font-family: 'Vazirmatn', 'Roboto', sans-serif;
+    background: #f7f8fa;
+    margin: 0;
+}
+
+.app-container {
+    max-width: 900px;
+    margin: 32px auto;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #0001;
+    background: #fff;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    background: #f0f3f7;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.title-input {
+    font-size: 1.3em;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    outline: none;
+}
+
+.btn {
+    margin-left: 12px;
+    background: #4f8cff;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 18px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s;
+}
+.btn:hover {
+    background: #3c6fd1;
+}
+
+.main-content {
+    display: flex;
+    min-height: 400px;
+}
+
+.sidebar {
+    width: 120px;
+    background: #f5f7fa;
+    border-right: 1px solid #e0e0e0;
+    padding: 24px 12px;
+}
+.sidebar h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: #444;
+}
+.tools {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 18px;
+}
+.tool-btn {
+    background: none;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: border 0.2s;
+}
+.tool-btn.selected, .tool-btn:hover {
+    border: 2px solid #4f8cff;
+    background: #eaf2ff;
+}
+.shape-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+}
+.shape-icon.circle {
+    border-radius: 50%;
+    border: 2px solid black;
+    background: transparent;
+}
+.shape-icon.square {
+    border: 2px solid black;
+    background: transparent;
+}
+
+.shape-icon.triangle {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 36px solid black;
+}
+
+.shape-icon.triangle::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: -15px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid white; /* match background */
+}
+
+.canvas {
+    position: relative;
+    flex: 1;
+    background: #fff;
+    margin: 18px;
+    border-radius: 12px;
+    border: 2px dashed #c7d0e0;
+    min-height: 320px;
+    overflow: hidden;
+}
+
+.canvas-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #bbb;
+    font-size: 1.5em;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #f0f3f7;
+    padding: 12px 0;
+    border-top: 1px solid #e0e0e0;
+}
+.footer-shape {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.1em;
+}
