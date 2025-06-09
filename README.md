@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# مستند پروژه Shape Painter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+این پروژه با هدف ساخت یه اپ ساده برای طراحی شکل‌های پایه مثل دایره، مربع و مثلث شروع شد. توی این فایل توضیح می‌دم چطوری قدم‌به‌قدم بخش‌های مختلف پروژه رو ساختم و قابلیت‌ها رو بهش اضافه کردم.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## مرحله اول: ساختار اولیه
 
-### `npm start`
+اول از همه، یه ساختار پایه برای اپ ساختم:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- یه **Header** که شامل عنوان نقاشی و دکمه‌های Export/Import بود.
+- یه **Sidebar** برای انتخاب نوع شکل (دایره، مربع، مثلث).
+- یه **Canvas** که روی اون می‌تونستم شکل‌ها رو قرار بدم.
+- و یه **Footer** که تعداد هر شکل رو نشون می‌داد.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+با این ساختار، همه‌چی آماده بود برای شروع کار با شکل‌ها.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## مرحله دوم: اضافه کردن شکل‌ها
 
-### `npm run build`
+وقتی یه شکل توی Sidebar انتخاب می‌شد و روی Canvas کلیک می‌کردم، یه شیء جدید با مختصات اون نقطه ایجاد می‌شد. از اونجایی که تنها مشخصاتی که برای کشیدن یه شکل نیاز داریم مختصات و نوع آن شکل هست (به علت ثابت بودن اندازه و رنگ)‌ و اینکه در هر زمان روی یک canvas تنها یک شکل میشد کشید، پس هر شکل یه `id` منحصربه‌فرد داشت (بر پایه `Date.now()`‌)، تا بتونم بعداً روش کار کنم.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+قابلیت حذف شکل‌ها رو هم با دوبار کلیک روی اون‌ها اضافه کردم.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+"برای این قسمت از هوش مصنوعی کمک گرفتم چون بعد از کمی جستجو و صحبت با هوش مصنوعی متوجه شدم که استفاده از تصاویر ثابت (static) برای اشکال هندسی توی طراحی رابط کاربری مدرن خیلی توصیه نمی‌شه و راهکار بهتر استفاده از فرمت `SVG` هستش. ولی خودم تجربه‌ای توی تعریف اشکال هندسی توی این فرمت نداشتم و نمیدونستم چطور اینکار رو انجام بدم؛ بنابراین از AI خواستم تا با توجه به شکل و سایز مدنظرم، اشکال رو برام توی فرمت مورد نظر تعریف کنه رو برام بسازه.
+از مزایای این روش تمیزی شکل ها و باز بودن دست طراح توی ساخت گستره‌ی زیادی از شکل هاست، و مشکلی که داره اینه که به گونه‌ای از بقیه‌ی پروژه تعریفش کمی متفاوته چون توی بقیه قسمت ها، چیزهایی از این قبیل توی style sheet تعریف میشن و توی کد از تعاریف استفاده میشه، ولی توی این بخش به صورت inline هستند که خودش به نوعی خیلی مناسب نیست."
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## مرحله سوم: Export و Import
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+برای اینکه بشه نقاشی‌ها رو ذخیره کرد یا دوباره لودشون کرد:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- دکمه **Export** داده‌ها رو (title + shapes) به JSON تبدیل می‌کنه و فایل رو برای دانلود می‌سازه. هر شکل فقط شامل مختصات، نوع شکل و id خودش توی فایل ذخیره می‌شه. و یک `title` هم برای عنوان صفحه ذخیره می‌شه.
+- دکمه **Import** یه فایل JSON رو می‌گیره، اطلاعاتش رو می‌خونه و صفحه رو طبق اون بارگذاری می‌کنه.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+اینجوری صرفاً با داشتن این فایل JSON می‌شه تمام اطلاعات اون نشست (`session`) رو بازسازی کرد. هم سبک و ساده‌ست، هم راحت قابل اشتراکه.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## مرحله چهارم: Drag & Drop
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**برای این بخش هم از هوش مصنوعی کمک گرفتم.**
+مخصوصاً برای محاسبه دقیق موقعیت جدید شکل حین کشیدن (drag) و همین‌طور اینکه چطور موقع کلیک و رها کردن، عملیات جابجایی شروع و متوقف بشه. پیاده‌سازی‌ش پیچیدگی‌هایی داشت و من تا اون موقع تجربه‌ای توی ساخت این منطق نداشتم.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+یه قابلیت باحال دیگه این بود که وقتی هیچ شکلی توی Sidebar انتخاب نشده، می‌تونم شکل‌هایی که روی Canvas هستن رو بگیرم و بکشم (drag کنم) و جابه‌جا کنم.
 
-### Code Splitting
+برای اینکه تجربه کاربر بهتر باشه:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- روی `mousedown` تشخیص می‌دم کلیک کجا خورده و offset اولیه رو حساب می‌کنم.
+- با `mousemove` مختصات جدید رو حساب کرده و `onShapeMove` صدا زده می‌شه.
+- با `mouseup` عملیات drag تموم می‌شه.
 
-### Analyzing the Bundle Size
+همه‌ی شکل‌ها هم با استفاده از SVG رسم شدن که دقت و کیفیت گرافیکی بهتری داره.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+"از مزیت های کد ساخته شده توسط AI این بود که منطق drag خیلی دقیق و responsive پیاده شد بدون اینکه ساعت‌ها درگیر تست و خطا بشم. اما از طرفی استفاده از اون کد باعث شد که بعضی جاها کنترل کامل کد دست خودم نبود (مثلاً برای جلوگیری از برخورد اشکال یا محدودیت حرکت به داخل canvas)، که بعداً مجبور شدم دقیق‌تر تحلیلش کنم و دستی اصلاحش کنم."
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## جمع‌بندی
 
-### Advanced Configuration
+با انجام همه‌ی کارهای بالا، خروجی یه اپ ReactJS با رابط کاربری ساده‌ست که توی اون می‌تونم title مشخص کنم، اشکال جدید به صفحه نقاشی اضافه کنم و اون‌ها رو در صورت نیاز جابجا کنم. و برای اینکه بشه یک نشست رو ذخیره یا دوباره بارگذاری کرد، می‌شه از هر صفحه خروجی JSON گرفت یا یه صفحه جدید رو از روی فایل JSON ساخت.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+هوش مصنوعی تو بعضی از قسمت‌های tricky پروژه کمکم کرد تا سریع‌تر و دقیق‌تر جلو برم، ولی در نهایت مهمه که خودم هم کدها رو خوب بفهمم تا بتونم بعداً گسترشش بدم یا اشکال‌یابی کنم.
